@@ -6,8 +6,6 @@ import fs from "fs";
 import path from "path";
 import * as dotenv from "dotenv";
 
-// Routes
-
 //** CONFIG **/
 const app: Application = express();
 dotenv.config();
