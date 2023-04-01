@@ -1,45 +1,14 @@
-version: "3.9"
+version: '3.9'
 services:
-  postgres:
-    image: postgres:latest
-    container_name: postgres
-    hostname: postgres
-    ports:
-      - 5432:5432
+  mongodb_container:
+    image: mongo:latest
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: gp2
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
-    restart: unless-stopped
-
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: pgadmin
-    depends_on:
-      - postgres
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
     ports:
-      - "5555:80"
-    environment:
-      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
-      PGADMIN_DEFAULT_PASSWORD: admin
+      - 27017:27017
     volumes:
-      - pgadmin-data:/var/lib/pgadmin
-    restart: unless-stopped
-
-  back-end:
-    stdin_open: true
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: back-end
-    depends_on:
-      - postgres
-    ports:
-      - "8080:8080"
-    restart: always
+      - mongodb_data_container:/data/db
 
 volumes:
-  postgres-data:
-  pgadmin-data:
+  mongodb_data_container:

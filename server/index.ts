@@ -37,7 +37,7 @@ app.use(
 );
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("Hello from the back");
+  res.send("Hello from the chat-service");
 });
 
 io.on("connection", (socket) => {
