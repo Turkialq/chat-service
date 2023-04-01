@@ -9,6 +9,13 @@ services:
       - 27017:27017
     volumes:
       - mongodb_data_container:/data/db
-
+  chat-server:
+    depends_on:
+    - "mongodb_container"
+    build: 
+      dockerfile: Dockerfile.dev
+      context: ./
+    ports:
+      - 8080:8080
 volumes:
   mongodb_data_container:
